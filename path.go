@@ -8,12 +8,12 @@ type Point struct {
 }
 
 type Line struct {
-	Start *Point
-	End   *Point
+	Start Point
+	End   Point
 }
 
 // DistanceToPoint returns the perpendicular distance of a point to the line.
-func (l *Line) DistanceToPoint(pt *Point) float64 {
+func (l Line) DistanceToPoint(pt Point) float64 {
 	a, b, c := l.Coefficients()
 	return math.Abs(a*pt.X+b*pt.Y+c) / math.Sqrt(a*a+b*b)
 }
@@ -23,7 +23,7 @@ func (l *Line) DistanceToPoint(pt *Point) float64 {
 //
 // ax + by + c = 0
 //
-func (l *Line) Coefficients() (a, b, c float64) {
+func (l Line) Coefficients() (a, b, c float64) {
 	a = l.Start.Y - l.End.Y
 	b = l.End.X - l.Start.X
 	c = l.Start.X*l.End.Y - l.End.X*l.Start.Y

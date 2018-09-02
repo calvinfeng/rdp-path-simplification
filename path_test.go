@@ -4,10 +4,10 @@ import "testing"
 
 func TestPath(t *testing.T) {
 	t.Run("TestCoefficients", func(t *testing.T) {
-		lines := []*Line{
-			&Line{Start: &Point{0, 0}, End: &Point{2, 2}},
-			&Line{Start: &Point{-1, 0}, End: &Point{3, 5}},
-			&Line{Start: &Point{-3, -5}, End: &Point{3, 7}},
+		lines := []Line{
+			Line{Start: Point{0, 0}, End: Point{2, 2}},
+			Line{Start: Point{-1, 0}, End: Point{3, 5}},
+			Line{Start: Point{-3, -5}, End: Point{3, 7}},
 		}
 
 		for _, l := range lines {
@@ -31,13 +31,13 @@ func TestPath(t *testing.T) {
 	})
 
 	t.Run("TestDistanceToPoint", func(t *testing.T) {
-		l := &Line{Start: &Point{0, 0}, End: &Point{10, 0}}
+		l := Line{Start: Point{0, 0}, End: Point{10, 0}}
 
-		points := []*Point{
-			&Point{5, 5},
-			&Point{3, 6},
-			&Point{1, -7},
-			&Point{-4, -10},
+		points := []Point{
+			Point{5, 5},
+			Point{3, 6},
+			Point{1, -7},
+			Point{-4, -10},
 		}
 
 		expectations := []float64{5, 6, 7, 10}
