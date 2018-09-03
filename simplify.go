@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+// SimplifyPath
 
-func PathSimplify(points []Point, ep float64) []Point {
+// SimplifyPath accepts a list of points and epsilon as tolerance, simplifies a path by dropping
+// some portion of the points.
+func SimplifyPath(points []Point, ep float64) []Point {
 	if len(points) <= 2 {
 		return []Point{points[0]}
 	}
@@ -10,9 +12,14 @@ func PathSimplify(points []Point, ep float64) []Point {
 	l := Line{Start: points[0], End: points[len(points)-1]}
 
 	idx, maxDist := seekMostDistantPoint(l, points)
-	fmt.Println(idx, maxDist)
+	if maxDist >= ep {
+		left := SimplifyPath(points[:idx+1], ep)
+		right := SimplifyPath(points[idx:], ep)
+		return append(left[:len(left)-1], right...)
+	}
 
-	return nil
+	// If the most distant point fails to pass the tolerance test, then just return the two points
+	return []Point{points[0], points[len(points)-1]}
 }
 
 func seekMostDistantPoint(l Line, points []Point) (idx int, maxDist float64) {

@@ -2,11 +2,13 @@ package main
 
 import "math"
 
+// Point represents a 2D point on a Cartesian plane.
 type Point struct {
 	X float64
 	Y float64
 }
 
+// Line represents a line segment.
 type Line struct {
 	Start Point
 	End   Point

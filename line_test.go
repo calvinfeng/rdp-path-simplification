@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestPath(t *testing.T) {
+func TestLine(t *testing.T) {
 	t.Run("TestCoefficients", func(t *testing.T) {
 		lines := []Line{
 			Line{Start: Point{0, 0}, End: Point{2, 2}},

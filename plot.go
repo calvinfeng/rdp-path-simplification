@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math"
 	"math/rand"
 
 	"gonum.org/v1/plot"
@@ -9,7 +10,8 @@ import (
 	"gonum.org/v1/plot/vg"
 )
 
-func SavePlot(points plotter.XYs) error {
+// SavePlot creates a plot of path and simplified path.
+func SavePlot(orig, simp plotter.XYs) error {
 	p, err := plot.New()
 	if err != nil {
 		return err
@@ -19,25 +21,23 @@ func SavePlot(points plotter.XYs) error {
 	p.X.Label.Text = "X"
 	p.Y.Label.Text = "Y"
 
-	err = plotutil.AddLinePoints(p, "Path", points)
+	err = plotutil.AddLinePoints(p, "Original Path", orig, "Simplified Path", simp)
 	if err != nil {
 		return err
 	}
 
-	return p.Save(10*vg.Inch, 5*vg.Inch, "path.png")
+	return p.Save(14*vg.Inch, 7*vg.Inch, "path.png")
 }
 
-func RandomPoints(n int) plotter.XYs {
-	pts := make(plotter.XYs, n)
-	for i := range pts {
-		if i == 0 {
-			pts[i].X = rand.Float64()
-		} else {
-			pts[i].X = pts[i-1].X + rand.Float64()
-		}
+// RandomXYs generates a XYs using Sine wave with additional noises.
+func RandomXYs(n int, scale float64) plotter.XYs {
+	xys := make(plotter.XYs, n)
+	increment := float64(2*math.Pi) / float64(n)
 
-		pts[i].Y = (pts[i].X + 10*rand.Float64()) * 1000
+	for i := range xys {
+		xys[i].X = float64(i) * increment
+		xys[i].Y = math.Sin(xys[i].X) + scale*rand.Float64()
 	}
 
-	return pts
+	return xys
 }
