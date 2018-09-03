@@ -4,7 +4,7 @@ package rdp
 // points that do not pass threshold values.
 func SimplifyPath(points []Point, ep float64) []Point {
 	if len(points) <= 2 {
-		return []Point{points[0]}
+		return points
 	}
 
 	l := Line{Start: points[0], End: points[len(points)-1]}
