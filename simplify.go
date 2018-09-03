@@ -1,9 +1,7 @@
-package main
+package rdp
 
-// SimplifyPath
-
-// SimplifyPath accepts a list of points and epsilon as tolerance, simplifies a path by dropping
-// some portion of the points.
+// SimplifyPath accepts a list of points and epsilon as threshold, simplifies a path by dropping
+// points that do not pass threshold values.
 func SimplifyPath(points []Point, ep float64) []Point {
 	if len(points) <= 2 {
 		return []Point{points[0]}
@@ -18,7 +16,7 @@ func SimplifyPath(points []Point, ep float64) []Point {
 		return append(left[:len(left)-1], right...)
 	}
 
-	// If the most distant point fails to pass the tolerance test, then just return the two points
+	// If the most distant point fails to pass the threshold test, then just return the two points
 	return []Point{points[0], points[len(points)-1]}
 }
 
