@@ -21,7 +21,7 @@ func SimplifyPath(points []Point, ep float64) []Point {
 }
 
 func seekMostDistantPoint(l Line, points []Point) (idx int, maxDist float64) {
-	for i := 0; i < len(points); i++ {
+	for i := 1; i < len(points)-1; i++ {
 		d := l.DistanceToPoint(points[i])
 		if d > maxDist {
 			maxDist = d
